@@ -1,6 +1,7 @@
 const tls = require("node:tls")
 const cluster = require("node:cluster")
 const fs = require("node:fs")
+const os = require("node:os")
 
 const color = {
     gray: (text) => `\x1b[90m${text}\x1b[0m`,
@@ -35,7 +36,7 @@ const formatDuration = (ms) => {
 };
 
 if (cluster.isPrimary) {
-    const numCPUs = 4
+    const numCPUs = os.cpus().length
     const startTime = Date.now()
     let totalProxiesFound = 0
     let totalChecked = 0
@@ -142,7 +143,7 @@ if (cluster.isPrimary) {
 } else {
     let myip
     let proxies = []
-    const CONCURRENCY = 30
+    const CONCURRENCY = 50
     let idx = 0
     let running = 0
     let resolve
