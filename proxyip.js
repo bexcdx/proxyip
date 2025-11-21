@@ -36,7 +36,7 @@ const formatDuration = (ms) => {
 };
 
 if (cluster.isPrimary) {
-    const numCPUs = os.cpus().length || 4
+    const numCPUs = os.cpus().length || 8
     const startTime = Date.now()
     let totalProxiesFound = 0
     let totalChecked = 0
