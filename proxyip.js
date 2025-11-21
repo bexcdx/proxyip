@@ -111,7 +111,7 @@ if (cluster.isPrimary) {
                         }
                     //    process.stdout.clearLine(0)
                      //   process.stdout.cursorTo(0)
-                        log(`Found: ${color.cyan(msg.data.proxy)}:${color.cyan(msg.data.port)} | ${color.yellow(msg.data.country || 'UNK')} | ${color.blue((msg.data.asOrganization || 'Unknown').substring(0, 30))} | ${color.cyan(msg.data.latency + 'ms')}`, "success")
+                      //  log(`Found: ${color.cyan(msg.data.proxy)}:${color.cyan(msg.data.port)} | ${color.yellow(msg.data.country || 'UNK')} | ${color.blue((msg.data.asOrganization || 'Unknown').substring(0, 30))} | ${color.cyan(msg.data.latency + 'ms')}`, "success")
                      //   updateProgress()
                     } else if (msg.type === "checked") {
                         totalChecked++
