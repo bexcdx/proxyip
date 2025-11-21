@@ -36,7 +36,7 @@ const formatDuration = (ms) => {
 };
 
 if (cluster.isPrimary) {
-    const numCPUs = os.cpus().length || 8
+    const numCPUs = os.cpus().length || 4
     const startTime = Date.now()
     let totalProxiesFound = 0
     let totalChecked = 0
@@ -143,7 +143,7 @@ if (cluster.isPrimary) {
 } else {
     let myip
     let proxies = []
-    const CONCURRENCY = 50
+    const CONCURRENCY = 30
     let idx = 0
     let running = 0
     let resolve
