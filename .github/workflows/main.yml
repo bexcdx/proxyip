@@ -1,0 +1,48 @@
+name: 🤖 Auto Update Proxy List
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  update-proxy-list:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+       
+      - name: 3. Install Dependencies
+        run: npm install
+
+      - name: 4. Run Proxy Update Script
+        run: node proxyip.js
+
+      - name: 5. Configure Git
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions-bot@users.noreply.github.com'
+
+      - name: 6. Commit Updated Files
+        run: |
+          git add .
+          
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Proxyip"
+          fi
+
+      - name: 7. Pull Remote Changes (Rebase)
+        run: git pull origin main --rebase
+
+      - name: 8. Push Changes to Remote
+        run: git push origin main
