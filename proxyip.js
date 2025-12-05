@@ -59,7 +59,7 @@ if (cluster.isPrimary) {
     }
 
     async function getMyIP() {
-        const response = await fetch("https://speed.cloudflare.com/meta")
+        const response = await fetch("https://speed.cloudflare.com/meta", { headers: { Referrer: "https://speed.cloudflare.com"}} )
         if (!response.ok) throw new Error(`Failed to fetch IP: ${response.status}`)
         const data = await response.json()
         return data.clientIp
@@ -176,7 +176,7 @@ if (cluster.isPrimary) {
             const timeout = setTimeout(() => { socket.destroy(); reject(new Error("Timeout")) }, 5000)
 
             const socket = tls.connect({ host, port: parseInt(port), servername: targetHost }, () => {
-                socket.write(`GET ${path} HTTP/1.1\r\nHost: ${targetHost}\r\nUser-Agent: Mozilla/5.0\r\nConnection: close\r\n\r\n`)
+                socket.write(`GET ${path} HTTP/1.1\r\nHost: ${targetHost}\r\nUser-Agent: Mozilla/5.0\r\nReferer: https://speed.cloudflare.com/\r\nConnection: close\r\n\r\n`)
             })
 
             let data = ""
