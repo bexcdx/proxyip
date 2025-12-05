@@ -59,7 +59,7 @@ if (cluster.isPrimary) {
     }
 
     async function getMyIP() {
-        const response = await fetch("https://speed.cloudflare.com/meta", { headers: { Referrer: "https://speed.cloudflare.com"}} )
+        const response = await fetch("https://speed.cloudflare.com/meta", { headers: { Referer: "https://speed.cloudflare.com"}} )
         if (!response.ok) throw new Error(`Failed to fetch IP: ${response.status}`)
         const data = await response.json()
         return data.clientIp
